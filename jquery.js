@@ -16,18 +16,19 @@ $(document).ready(function () {
                     var clas = value2['class']
                     var placeholder = value2['placeholder']
                     var value = value2['value']
-                    var keyf = key1 + 1;
+                    var keyf = parseInt(key1) + 1;
                     // console.log(input_value, 'rrr')
                     // console.log(value2[1])
                     // console.log(value2['option'], 'arroption')
                     if (input_value == 'Radio') {
+                        console.log(key, keyf, ';;;')
                         var arr = value2['option']
                         // console.log(arr, 'apna')
                         var f1 = $('<p style="padding:10px">' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
                         $.each(arr, function (i) {
                             $('<input type="' + input_value + '" value="' + arr[i] + '"> <label>' + arr[i] + '</label><br />').appendTo(f1);
                         });
-                        $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(key + 1) + ') ').append(f1);
+                        $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(keyf + 1) + ') ').append(f1);
                     }
                     else if (input_value == 'select') {
                         var arr1 = value2['option']
@@ -36,7 +37,7 @@ $(document).ready(function () {
                         $.each(arr1, function (i) {
                             B.append('<option>' + arr1[i] + '</option>');
                         });
-                        $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(key + 1) + ') ').append(A);
+                        $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(keyf + 1) + ') ').append(A);
                     }
                     else if (input_value == 'Textarea') {
                         $('main section:nth-child(' + key + ')').append('<p><label>' + label + ':' + '</label>' + '<textarea type="' + input_value + '"' + ' class = "' + clas + '"' + ' placeholder="' + placeholder + '"' + '></textarea><button type="button" class="btn-close" onclick="myFunction(this)"></button></p>')
@@ -48,10 +49,10 @@ $(document).ready(function () {
                         $.each(arr2, function (i) {
                             $('<input type="' + input_value + '" value="' + arr2[i] + '"> <label>' + arr2[i] + '</label><br />').appendTo(g1);
                         });
-                        $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(key + 1) + ') ').append(g1);
+                        $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(keyf + 1) + ') ').append(g1);
                     }
                     else {
-                        $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(key + 1) + ') ').append('<p style="padding:10px">' + '<label class="label">' + label + ' : ' + '</label>' + '<input type="' + input_value + '"' + ' class="' + clas + '"' + 'placeholder="' + placeholder + '"' + 'value="' + value + '"' + '>' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
+                        $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(keyf + 1) + ') ').append('<p style="padding:10px">' + '<label class="label">' + label + ' : ' + '</label>' + '<input type="' + input_value + '"' + ' class="' + clas + '"' + 'placeholder="' + placeholder + '"' + 'value="' + value + '"' + '>' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
 
                     }
                     // $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(key + 1) + ') ').append('<p style="padding:10px">' + '<label class="label">' + label + ' : ' + '</label>' + '<input type="' + input_value + '"' + ' class="' + clas + '"' + 'placeholder="' + placeholder + '"' + 'value="' + value + '"' + '>' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
@@ -113,6 +114,7 @@ $(document).ready(function () {
         var eee = $('.heading-input_2').val()
         var ddd = parseInt(eee) + 1
         if (input_value == 'Radio') {
+            console.log(ddd, fdn)
             var arr = $('.option').val().split(",");
             var f1 = $('<p style="padding:10px">' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
             $.each(arr, function (i) {
