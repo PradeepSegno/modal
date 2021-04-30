@@ -234,25 +234,31 @@ $(document).ready(function () {
 
 function myFunction(el) {
     // el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode)
-    var arr_local = [];
+
 
     // var checked = $(checked == [Object] == 1);
     // var url = localStorage.key(checked);
     // localStorage.removeItem(url);
     // $("arr_local").listview('refresh');
+    var arr_local = [];
     window.localStorage.clear();
     var heading = $('.input_1').val();
-    arr_local.push({ 'heading': heading, 'sub_arr': [] })
+    $('main').append($('<section><h1>' + heading + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></h1></section>'));
+
     $('main section h1').each(function (index) {
+
         var heading1 = $(this).text()
+        arr_local.push({ 'heading': heading1, 'sub_arr': [] })
         index = index + 1
         $('.heading_1').append('<option value="' + index + '">' + heading1 + '</option>');
         $('.heading-input').append('<option value="' + index + '">' + heading1 + '</option>');
     });
     var sub_heading = $('.input_2').val();
     var heading_index = $('.heading_1').val()
-    arr_local[heading_index].sub_arr.push({ 'subheading': sub_heading, 'form': [] })
     window.localStorage.setItem('arr_local', JSON.stringify(arr_local));
+    // $('main section:nth-child(' + heading_index + ')').append('<div style="padding:10px"><h2>' + sub_heading + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></h2></div>');
+    // arr_local[heading_index].sub_arr.push({ 'subheading': sub_heading, 'form': [] })
+
     // localFunction()
 
 
