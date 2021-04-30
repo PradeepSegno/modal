@@ -5,7 +5,18 @@ $(document).ready(function () {
         $(returnObjName).each(function (key, val) {
             var key = key + 1;
             $('main').append($('<section><h1>' + val['heading'] + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></h1></section>'));
-
+            // $(":button").on("click", function () {
+            //     $(this).css("color", "red");
+            //     var i = $(this).val();
+            //     localStorage.removeItem(arr_local[i]);
+            //     // localStorage.clear();
+            // });
+            // $("button").on('click', function () {
+            //     var checked = $(this).val();
+            //     // var url = localStorage.key(checked);
+            //     localStorage.removeItem(checked);
+            //     // $("arr_local").listview('refresh');
+            // });
             $('.heading_1').append('<option value="' + key + '">' + val['heading'] + '</option>');
             $('.heading-input').append('<option value="' + key + '">' + val['heading'] + '</option>');
             $(val['sub_arr']).each(function (key1, value1) {
@@ -80,6 +91,12 @@ $(document).ready(function () {
         });
         $('.heading_1_form')[0].reset();
         localFunction()
+        // $("button").on('click', function () {
+        //     var checked = $(this).val();
+        //     // var url = localStorage.key(checked);
+        //     localStorage.removeItem(checked);
+        //     // $("arr_local").listview('refresh');
+        // });
         // $('#exampleModal_1').modal('hide');
     });
     $('.heading_2_form').submit(function (event) {
@@ -206,12 +223,45 @@ $(document).ready(function () {
 
 });
 
+// function myFunction(text) {
+//     var items = JSON.parse(localStorage.getItem("arr_local"));
+//     items = items.filter(function (e) { return e !== text; });
+//     localStorage.setItem("arr_local", JSON.stringify(items));
+// }
+
+// myFunction("heading");
 
 
 function myFunction(el) {
-    // var element = el;
-    el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode);
+    // el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode)
+    var arr_local = [];
+
+    // var checked = $(checked == [Object] == 1);
+    // var url = localStorage.key(checked);
+    // localStorage.removeItem(url);
+    // $("arr_local").listview('refresh');
+    window.localStorage.clear();
+    var heading = $('.input_1').val();
+    arr_local.push({ 'heading': heading, 'sub_arr': [] })
+    $('main section h1').each(function (index) {
+        var heading1 = $(this).text()
+        index = index + 1
+        $('.heading_1').append('<option value="' + index + '">' + heading1 + '</option>');
+        $('.heading-input').append('<option value="' + index + '">' + heading1 + '</option>');
+    });
+    var sub_heading = $('.input_2').val();
+    var heading_index = $('.heading_1').val()
+    arr_local[heading_index].sub_arr.push({ 'subheading': sub_heading, 'form': [] })
+    window.localStorage.setItem('arr_local', JSON.stringify(arr_local));
+    // localFunction()
+
+
+    // var i = $(this).parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode).val();
+    // localStorage.removeItem(arr[i]);
+    // localStorage.clear();
+
 }
+
 function ymFunction(el) {
     var element = el;
     element.remove();
