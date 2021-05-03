@@ -4,21 +4,10 @@ $(document).ready(function () {
         var returnObjName = JSON.parse(localStorage.getItem('arr_local'));
         $(returnObjName).each(function (key, val) {
             var key = key + 1;
-            $('main').append($('<section><h1>' + val['heading'] + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></h1></section>'));
-            // $(":button").on("click", function () {
-            //     $(this).css("color", "red");
-            //     var i = $(this).val();
-            //     localStorage.removeItem(arr_local[i]);
-            //     // localStorage.clear();
-            // });
-            // $("button").on('click', function () {
-            //     var checked = $(this).val();
-            //     // var url = localStorage.key(checked);
-            //     localStorage.removeItem(checked);
-            //     // $("arr_local").listview('refresh');
-            // });
+            $('main').append($('<section><h1>' + val['heading'] + '<button type="button" class="btn-close" onclick="myFunction()"></button></h1></section>'));
             $('.heading_1').append('<option value="' + key + '">' + val['heading'] + '</option>');
             $('.heading-input').append('<option value="' + key + '">' + val['heading'] + '</option>');
+            localFunction()
             $(val['sub_arr']).each(function (key1, value1) {
                 $('main section:nth-child(' + key + ')').append('<div style="padding:10px"><h2>' + value1['subheading'] + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></h2></div>');
                 $(value1['form']).each(function (key2, value2) {
@@ -28,14 +17,10 @@ $(document).ready(function () {
                     var placeholder = value2['placeholder']
                     var value = value2['value']
                     var keyf = parseInt(key1) + 1;
-                    // console.log(input_value, 'rrr')
-                    // console.log(value2[1])
-                    // console.log(value2['option'], 'arroption')
                     if (input_value == 'Radio') {
                         console.log(key, keyf, ';;;')
                         var arr = value2['option']
-                        // console.log(arr, 'apna')
-                        var f1 = $('<p style="padding:10px">' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
+                        var f1 = $('<div><p style="padding:10px">' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p></div>');
                         $.each(arr, function (i) {
                             $('<input type="' + input_value + '" value="' + arr[i] + '"> <label>' + arr[i] + '</label><br />').appendTo(f1);
                         });
@@ -43,7 +28,7 @@ $(document).ready(function () {
                     }
                     else if (input_value == 'select') {
                         var arr1 = value2['option']
-                        var A = $('<p style="padding:10px"><button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
+                        var A = $('<div><p style="padding:10px"><button type="button" class="btn-close" onclick="myFunction(this)"></button></p></div>');
                         var B = $('<select class="' + clas + '">' + '<option value=select a value>select a value</option>' + '</select>').appendTo(A);
                         $.each(arr1, function (i) {
                             B.append('<option>' + arr1[i] + '</option>');
@@ -51,19 +36,19 @@ $(document).ready(function () {
                         $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(keyf + 1) + ') ').append(A);
                     }
                     else if (input_value == 'Textarea') {
-                        $('main section:nth-child(' + key + ')').append('<p><label>' + label + ':' + '</label>' + '<textarea type="' + input_value + '"' + ' class = "' + clas + '"' + ' placeholder="' + placeholder + '"' + '></textarea><button type="button" class="btn-close" onclick="myFunction(this)"></button></p>')
+                        $('main section:nth-child(' + key + ')').append('<div><p><label>' + label + ':' + '</label>' + '<textarea type="' + input_value + '"' + ' class = "' + clas + '"' + ' placeholder="' + placeholder + '"' + '></textarea><button type="button" class="btn-close" onclick="myFunction(this)"></button></p></div>')
 
                     }
                     else if (input_value == 'checkbox') {
                         var arr2 = value2['option']
-                        var g1 = $('<p style="padding:10px">' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
+                        var g1 = $('<div><p style="padding:10px">' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p></div>');
                         $.each(arr2, function (i) {
                             $('<input type="' + input_value + '" value="' + arr2[i] + '"> <label>' + arr2[i] + '</label><br />').appendTo(g1);
                         });
                         $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(keyf + 1) + ') ').append(g1);
                     }
                     else {
-                        $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(keyf + 1) + ') ').append('<p style="padding:10px">' + '<label class="label">' + label + ' : ' + '</label>' + '<input type="' + input_value + '"' + ' class="' + clas + '"' + 'placeholder="' + placeholder + '"' + 'value="' + value + '"' + '>' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
+                        $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(keyf + 1) + ') ').append('<div><p style="padding:10px"><form class="form">' + '<label class="label">' + label + ' : ' + '</label>' + '<input type="' + input_value + '"' + ' class="' + clas + '"' + 'placeholder="' + placeholder + '"' + 'value="' + value + '"' + '>' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></form></p></div>');
 
                     }
                     // $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(key + 1) + ') ').append('<p style="padding:10px">' + '<label class="label">' + label + ' : ' + '</label>' + '<input type="' + input_value + '"' + ' class="' + clas + '"' + 'placeholder="' + placeholder + '"' + 'value="' + value + '"' + '>' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
@@ -133,7 +118,7 @@ $(document).ready(function () {
         if (input_value == 'Radio') {
             console.log(ddd, fdn)
             var arr = $('.option').val().split(",");
-            var f1 = $('<p style="padding:10px">' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
+            var f1 = $('<div><p style="padding:10px">' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p></div>');
             $.each(arr, function (i) {
                 $('<input type="' + input_value + '" value="' + arr[i] + '"> <label>' + arr[i] + '</label><br />').appendTo(f1);
 
@@ -145,7 +130,7 @@ $(document).ready(function () {
         }
         else if (input_value == 'select') {
             var arr1 = $('.option').val().split(",");
-            var A = $('<p style="padding:10px"><label>' + label + '</label><button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
+            var A = $('<div><p style="padding:10px"><label>' + label + '</label><button type="button" class="btn-close" onclick="myFunction(this)"></button></p></div>');
             var B = $('<select class="' + clas + '">' + '<option value=select a value>select a value</option>' + '</select>').appendTo(A);
             $.each(arr1, function (i) {
                 B.append('<option>' + arr1[i] + '</option>');
@@ -158,14 +143,14 @@ $(document).ready(function () {
             $('main section:nth-child(' + fdn + ') div:nth-child(' + ddd + ') ').append(A);
         }
         else if (input_value == 'Textarea') {
-            $('main section:nth-child(' + fdn + ')').append('<p><label>' + label + ':' + '</label>' + '<textarea type="' + input_value + '"' + ' class = "' + clas + '"' + ' placeholder="' + placeholder + '"' + '></textarea><button type="button" class="btn-close" onclick="myFunction(this)"></button></p>')
+            $('main section:nth-child(' + fdn + ')').append('<div><p><label>' + label + ':' + '</label>' + '<textarea type="' + input_value + '"' + ' class = "' + clas + '"' + ' placeholder="' + placeholder + '"' + '></textarea><button type="button" class="btn-close" onclick="myFunction(this)"></button></p></div>')
             // arr_local.push({ 'option': arr[i] })
             arr_local[fdn - 1].sub_arr[eee - 1].form.push({ 'label': label, 'input_value': input_value, 'class': clas, 'placeholder': placeholder })
 
         }
         else if (input_value == 'checkbox') {
             var arr2 = $('.option').val().split(",");
-            var g1 = $('<p style="padding:10px">' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
+            var g1 = $('<div><p style="padding:10px">' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p></div>');
             $.each(arr2, function (i) {
                 $('<input type="' + input_value + '" value="' + arr2[i] + '"> <label>' + arr2[i] + '</label><br />').appendTo(g1);
 
@@ -177,7 +162,7 @@ $(document).ready(function () {
             $('main section:nth-child(' + fdn + ') div:nth-child(' + ddd + ') ').append(g1);
         }
         else {
-            $('main section:nth-child(' + fdn + ') div:nth-child(' + ddd + ') ').append('<p style="padding:10px">' + '<label class="label">' + label + ' : ' + '</label>' + '<input type="' + input_value + '"' + ' class="' + clas + '"' + 'placeholder="' + placeholder + '"' + 'value="' + value + '"' + '>' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></p>');
+            $('main section:nth-child(' + fdn + ') div:nth-child(' + ddd + ') ').append('<div><p style="padding:10px"><form class="form">' + '<label class="label">' + label + ' : ' + '</label>' + '<input type="' + input_value + '"' + ' class="' + clas + '"' + 'placeholder="' + placeholder + '"' + 'value="' + value + '"' + '>' + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></form></p></div>');
             // arr_local.push({ 'label': label, 'input_value': input_value, 'class': clas, 'placeholder': placeholder, 'value': value })
             arr_local[fdn - 1].sub_arr[eee - 1].form.push({ 'label': label, 'input_value': input_value, 'class': clas, 'placeholder': placeholder, 'value': value })
 
@@ -188,92 +173,47 @@ $(document).ready(function () {
         // window.localStorage.setItem('all_values', JSON.stringify(arr_local));
     });
     function localFunction() {
-        //     var arr_local = []
-        //     $('main section h1').each(function (index) {
-        //         var heading_text = $(this).text();
-        //         index = index + 1
-        //         arr_local.push({ 'heading': heading_text, 'subheading_arr': [] });
-        //         $('main section:nth-child(' + index + ') div h2').each(function (index1) {
-        //             index1 = index1 + 1
-        //             
-        //             var subheading_text = $(this).text();
-        //             arr_local[index - 1].subheading_arr.push({ 'subheading_key': subheading_text, 'form': [] });
-        //             $('main section:nth-child(' + index + ') div:nth-child(' + index1 + ') p ').each(function (index2) {
-        //                 index2 = index2 + 1
-        //                 var label_1 = $(this).text();
-        //                 
-        //                 arr_local[index - 1].subheading_arr[index - 1].form.push({ 'label': label_1, 'option': [] })
-        //                 // index2 = index2 + 1
-        //             });
-        //             // index1 = index1 + 1
-        //         });
-        //         // index = index + 1
-        //     });
         window.localStorage.setItem('arr_local', JSON.stringify(arr_local));
-        // 
-        // var head = window.localStorage.getItem('heading_text')
-        // $.each(head, function () {
-
-        // })
-
-
-
     }
 
 
 });
 
-// function myFunction(text) {
-//     var items = JSON.parse(localStorage.getItem("arr_local"));
-//     items = items.filter(function (e) { return e !== text; });
-//     localStorage.setItem("arr_local", JSON.stringify(items));
-// }
-
-// myFunction("heading");
-
 
 function myFunction(el) {
-    // el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode)
-
-
-    // var checked = $(checked == [Object] == 1);
-    // var url = localStorage.key(checked);
-    // localStorage.removeItem(url);
-    // $("arr_local").listview('refresh');
-    var arr_local = [];
+    el.parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode)
+    var arr_local = []
     window.localStorage.clear();
-    var heading = $('.input_1').val();
-    $('main').append($('<section><h1>' + heading + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></h1></section>'));
-
-    $('main section h1').each(function (index) {
-
+    $('main section h1').each(function (key, val) {
         var heading1 = $(this).text()
+        // var indexOf = $(this).val()
+        var key = key + 1
         arr_local.push({ 'heading': heading1, 'sub_arr': [] })
-        index = index + 1
-        $('.heading_1').append('<option value="' + index + '">' + heading1 + '</option>');
-        $('.heading-input').append('<option value="' + index + '">' + heading1 + '</option>');
-    });
-    var sub_heading = $('.input_2').val();
-    var heading_index = $('.heading_1').val()
+        $('main section:nth-child(' + key + ') h2').each(function (key1, value1) {
+            var this_value = $(this).text();
+            arr_local[key - 1].sub_arr.push({ 'subheading': this_value, 'form': [] })
+            $('main section:nth-child(' + key + ') div:nth-child(' + parseInt(key + 1) + ') p').each(function (key2, value2) {
+                var data = $('.form').serializeArray()
+
+                console.log(data, 'rrr')
+                var input_value = $('.type').val();
+                var label = $('.label').val();
+                var clas = $('.clas').val();
+                var value = $('.value').val();
+                var placeholder = $('.placeholder').val();
+                var option = $('.option').val();
+                arr_local[key - 1].sub_arr[key - 1].form.push({ 'label': label, 'input_value': input_value, 'class': clas, 'placeholder': placeholder, 'value': value })
+                // $.each(data, function (i) {
+
+                // })
+
+            })
+        })
+    })
     window.localStorage.setItem('arr_local', JSON.stringify(arr_local));
-    // $('main section:nth-child(' + heading_index + ')').append('<div style="padding:10px"><h2>' + sub_heading + '<button type="button" class="btn-close" onclick="myFunction(this)"></button></h2></div>');
-    // arr_local[heading_index].sub_arr.push({ 'subheading': sub_heading, 'form': [] })
-
-    // localFunction()
-
-
-    // var i = $(this).parentNode.parentNode.parentNode.removeChild(el.parentNode.parentNode).val();
-    // localStorage.removeItem(arr[i]);
-    // localStorage.clear();
-
 }
 
-function ymFunction(el) {
-    var element = el;
-    element.remove();
-}
-
-// [0].subheading_arr[0].form
-// [0].subheading_arr[1].form
-// [1].subheading_arr[0].form
-// [1].subheading_arr[1].form
+// function ymFunction(el) {
+//     var element = el;
+//     element.remove();
+// }
